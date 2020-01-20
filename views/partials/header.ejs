@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+    crossorigin="anonymous">
+
+  <title>Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+    body {
+      font-family: 'Open Sans', 'sans-serif';
+      color: white;
+      background: #313131;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .activityBox {
+
+      border-left: 10px solid green;
+      width: 13vw;
+      height: 8.85vh;
+      background-color: #454545;
+      margin: auto;
+      display: inline-block;
+      margin-right: 0.5vh;
+      margin-left: 0.5vh;
+      margin-top: 1.1vh;
+      text-align: left;
+    }
+
+    .activityBox h4 {
+      padding-top: 0.6vh;
+      margin: 0;
+      margin-top: 0.5vh;
+      padding-left: 0.7vw;
+      font-size: 1.2em;
+      font-weight: 550;
+    }
+
+    .activityBox:nth-child(2) {
+      margin-top: 1.8vh;
+    }
+
+    .activityBox p {
+      margin: 0;
+      padding-left: 0.7vw;
+      font-size: 1.2em;
+      color: #b9bbbf;
+    }
+
+    #time p {
+      float: left;
+      font-size: 1.2em;
+    }
+
+    .activitybox {
+      text-align: left;
+      margin-left: 1.5vw;
+    }
+
+    .activityBox span {
+      padding-right: 0.7vw;
+    }
+
+    .boxline {}
+
+    .col1 {
+      width: 15vw;
+      bottom: 9vh;
+      height: 91vh;
+      left: 0vw;
+      overflow: hidden;
+      position: absolute;
+      background-color: #3d3d3d;
+      color: white;
+      display: inline-block;
+    }
+
+    #col2 {
+      width: 30vw;
+      bottom: 9vh;
+      height: 91vh;
+      right: 0vw;
+      overflow: hidden;
+      position: absolute;
+      background-color: #3d3d3d;
+      color: white;
+      display: inline-block;
+    }
+
+    #col2 p:nth-child(1) {
+      font-size: 1.8em;
+      padding-top: 10px;
+    }
+
+
+
+    h1 {}
+
+    .image {
+      height: 30vh;
+      width: 36vw;
+    }
+
+    #img {
+      width: 53vw;
+      height: 48.7vh;
+      text-align: center;
+      margin-top: -2.80vh;
+    }
+
+    .item {
+      display: block;
+      font-size: 1.5em;
+      left: 0;
+      max-width: 40vw;
+      margin-left: 17.10vw;
+    }
+
+    .logofront {
+      //background-color: #505050;
+      transform: rotateX(360deg);
+    }
+
+    .newsbox {
+      background-color: #505050;
+      color: white;
+      font-size: 1.5em;
+      position: absolute;
+      left: 15vw;
+      bottom: 0;
+      height: 7vh;
+      width: 70vw;
+      padding-top: 2vh;
+      overflow: hidden;
+    }
+
+    .nextNewsBox {
+      width: 15wv;
+      height: 7.35vh;
+      border: solid 0px #313131;
+      margin: auto;
+      font-size: 1.3em;
+      margin-top: -0.7vh;
+      background-color: #505050;
+      color: #b9bbbf;
+
+    }
+
+    .nextNewsBox:nth-child(1) {
+      width: 15vw;
+      height: 7.1vh;
+      margin: auto;
+      border: solid 0px black;
+      font-size: 1.8em;
+      margin-top: 0vh;
+      background-color: #3d3d3d;
+      color: white;
+    }
+
+    .nextNewsBox:nth-child(1) p {
+      padding-top: 10px;
+    }
+
+    .nextNewsBox p {
+      padding-top: 30px;
+    }
+
+
+    #newsdiv {
+      background-color: #3d3d3d;
+      color: white;
+      font-size: 1.5em;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 9vh;
+      width: 15vw;
+      overflow: hidden;
+    }
+
+    .text {
+      /* background-color: white;*/
+      color: white;
+      height: 28.70vh;
+      width: 50vw;
+      font-size: 1.2em;
+      margin-top: -1.52vh;
+
+    }
+
+    .text p {
+      padding: 1vw;
+      text-align: left;
+    }
+
+    #title {
+      margin-top: -0.5vh;
+      margin-bottom: 5.5vh;
+      padding-top: 30px;
+      text-align: left;
+    }
+
+    #upnext {
+      background-color: green;
+      color: white;
+      font-size: 1.5em;
+      position: absolute;
+      left: 0;
+      height: 7vh;
+      width: 15vw;
+      padding-top: 2vh;
+      overflow: hidden;
+    }
+
+
+    .weatherBox {
+      background-color: #505050;
+      color: white;
+      font-size: 1.5em;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 7vh;
+      width: 15vw;
+      padding-top: 2vh;
+      overflow: hidden;
+    }
+
+    .weatherBox span {
+      font-size: 1.5em;
+      padding-left: 15px;
+    }
+  </style>
+</head>
+
+<body onclick="toggleFullScreen();">

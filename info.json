@@ -1,0 +1,16 @@
+{
+    "groupName": "Gruppe 2",
+    "participants": "Mark Mousing, Nadine Bruhn, Lasse Christensen, Henrik Bak",
+    "projectTitle": "Dashboard",
+    "projectDescription": "Dashboard til Mediehuset",
+    "repository": "https://github.com/Lassemc475/Dashboard",
+    "thumbnail": "Et Dashboard bestilt til Mediehuset, TechCollege. Dashboard består af 4 sektioner, som indeholder hhv. Skolens nyheder, hold, lokaler og tid.",
+    "roles": {
+      "Grafik": "Nadine Bruhn",
+      "Projektleder": "Henrik Bak",
+      "Programmør": {
+        "Front-end": "Nadine Bruhn, Mark Mousing",
+        "Back-end": "Lasse Christensen, Henrik Bak"
+      }
+    }
+  }

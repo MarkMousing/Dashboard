@@ -1,0 +1,287 @@
+<% include partials/header %>
+
+
+<div id="newsNext" style="display:none;">
+  <%- newsNext %>
+</div>
+<div id="weather" style="display:none;">
+  <%= weather %>
+</div>
+<div id="news" style="display:none;">
+  <%= latestNews %>
+</div>
+<div id="activityArray" style="display:none;">
+  <%= activityArray %>
+</div>
+
+<div class="weatherArea">
+
+</div>
+<!--Nuværende nyhed-->
+<div class="item">
+  <h1 id="title" style="width: 55vw;">Mediehuset</h1>
+  <img id="img" style="width: 50vw;" src="https://i.imgur.com/vFn5FDO.png">
+  <div class="text">
+    <p id="message">
+    Velkommen til Mediehuset
+    </p>
+  </div>
+</div>
+<!--Næste nyheder-->
+<div class="col1">
+  <div id="nextNews">
+  </div>
+</div>
+<!--Næste 16 aktiviteter + tid.-->
+<div id="col2">
+  <p class="activitybox">Aktiviteter <span id="time" style="float:right; padding-right: 1.3vw;">test</span></p>
+  <div id="activity">
+
+  </div>
+
+
+</div>
+
+
+<!--Mediehus logo-->
+<div id="newsdiv">
+  <div class="logofront">
+    <img width=50% style="padding-top: 11.5px;" src="https://user-images.githubusercontent.com/42137372/52561120-bdbf1000-2dfa-11e9-80d9-5ec439034d5e.png">
+  </div>
+  <div class="logoback" style="padding-top: 20px;">
+    Seneste nyt:
+  </div>
+</div>
+
+<!--Newsfeed fra Tv2-->
+<div class="newsbox" id="newsfeed">
+</div>
+<!--Temperatur hentet fra API.-->
+<div class="weatherBox" id="temp">
+
+</div>
+
+
+
+<script>
+  var news2 = "";
+  var thisNews = 0;
+  var number = 0;
+  picnum = 0;
+
+  //NÆSTE NYHED MED NYHEDS SEKTION SOM SCROLLER OPAD SEKTION 1
+  newsNext = JSON.parse(document.getElementById("newsNext").textContent);
+
+  //skaber div container samt indsætter overskriftstitel fra vctitle hentet fra databasen.
+  function nextNews(val) {
+    nextNews = document.getElementById("nextNews");
+    //console.log(newsNext);
+    news2 = "";
+    for (var i = 0; i < newsNext.length; i++) {
+      news2 = news2 + "<div class='nextNewsBox'><p>" + newsNext[i].vcTitle + "</p></div>";
+      nextNews.innerHTML = news2;
+    }
+  }
+
+  //AKTUELT NYHEDSBILLEDE I STORT FORMAT SAMT TEKST DERTIL I SEKTION 2
+
+  function changeNews() {
+    nextNews = document.getElementById("nextNews");
+
+    setMessage()
+    thisNews++;
+    //console.log(thisNews);
+    news2 = "";
+
+    //skaber div container samt indsætter overskriftstitel fra vctitle hentet fra databasen.
+    for (var i = number; i < newsNext.length; i++) {
+      news2 = news2 + "<div class='nextNewsBox'><p>" + newsNext[i].vcTitle + "</p></div>";
+      nextNews.innerHTML = news2;
+    }
+
+  }
+
+//Tilføjer meddelselse til "stor format" og smider samtidigt nuværende nyhed ind i array'et igen.
+  function setMessage() {
+    console.log(newsNext);
+    nameOfNews = newsNext[number].vcTitle;
+    contentOfNews = newsNext[number].txContent;
+    vData = '{"vcTitle" : "' + nameOfNews + '", "txContent" : "' + contentOfNews + '" }';
+    console.log(vData);
+    newsNext.push(JSON.parse(vData));
+
+    //console.log(newsNext);
+
+    var title = document.getElementById("title");
+    var message = document.getElementById("message");
+    var img = document.getElementById("img");
+    //console.log(nextNews[number].vcTitle);
+
+    //vctitle sendes over i title id og tælles 1 op af number.
+    title.innerHTML = newsNext[number].vcTitle;
+
+    //newsNext sendes over i message id og tælles 1 op af number.
+    message.innerHTML = newsNext[number].txContent;
+    //console.log(nextNews[0].iMedieID);
+
+    //billede sendes over i img id og tælles 1 op af number.
+
+    //Billed array , da vi ikke kan hente billeder fra databasen endnu, da de ikke er lagt op.
+    var billed = ["https://i.imgur.com/vFn5FDO.png", "https://i.imgur.com/K6IuEGv.jpg",
+      "https://i.imgur.com/vFn5FDO.png", "https://i.imgur.com/K6IuEGv.jpg", "https://i.imgur.com/7hC0upB.jpg",
+      "https://i.imgur.com/OWk44sc.jpg", "https://i.imgur.com/vFn5FDO.png", "https://i.imgur.com/GLOKRM8.jpg"
+    ];
+    console.log(billed.length);
+
+    if (picnum < billed.length) {
+      img.src = billed[picnum];
+      picnum++;
+    } else {
+      picnum = 0;
+    }
+
+
+    number++;
+
+    if (number == nextNews.length - 1) {
+
+      number = 0;
+    }
+
+
+  }
+  //AKTIVITETSBOKS SEKTION 3
+  nextActivity = JSON.parse(document.getElementById("activityArray").textContent);
+  //console.log(nextActivity);
+
+  //skaber aktivitet sektionen, hvor hver faggruppe får deres repsektive farvekode samt der skabes div contatiner til aktivitetssektionen.
+  function activities() {
+    activity = document.getElementById("activity");
+    var actibox = "";
+    for (var i = 0; i < 16; i++) {
+      var color = ["#c12020", "#9916b1", "#009bb9", "#84b12a", "black", "black", "black", "white"];
+      var fag = ["Webudvikler", "Mediegrafiker", "Grafisk tekniker", "Digitalmedie", "TechLab", "DesignLab",
+        "PictureLab", "Efteruddannelse"
+      ];
+      //Tjekker om hvilken farve vi skal bruge til uddannelse udfra navnet
+      if (nextActivity[i].vcClass.includes("fiw")) {
+        color = "black";
+      } else if (nextActivity[i].vcClass.includes("we")) {
+        color = "#c12020";
+      } else if (nextActivity[i].vcClass.includes("dm")) {
+        color = "#84b12a";
+      } else if (nextActivity[i].vcClass.includes("gr")) {
+        color = "#009bb9";
+      } else if (nextActivity[i].vcClass.includes("mg")) {
+        color = "#9916b1";
+      } else {
+        color = "black";
+      }
+
+      var colorino = "border-left: 10px solid " + color + ";";
+
+      var date = new Date(nextActivity[i].daTime * 1000);
+      var hours = date.getHours();
+      var minutes = "0" + date.getMinutes();
+      //Indsætter hver enkel aktivitet i sin egen boks, hvor farve, tid og andet kommer med.
+      //Vi brguer en substr(-2) for at undgå 9:020 tider f.eks
+
+      actibox = actibox + "<div class='activityBox' style='" + colorino + "'>   <h4>" + nextActivity[i].vcSubject +
+        " <span style='float:right';>" + nextActivity[i].vcClass + "</span></h4>    <p>Lokale: " + nextActivity[i].vcClassroom +
+        "</p>  <p>Tid: " + hours + ":" + minutes.substr(-2) + "</p></div>";
+      activity.innerHTML = actibox;
+    }
+  }
+
+  activities();
+
+  //NEWSBAR HVOR DER ER NYHEDER FRA TV2 SEKTION 4
+  news = JSON.parse(document.getElementById("news").textContent);
+
+  function newsFeed() {
+    var breaking = 0;
+    var newsfeed = document.getElementById("newsfeed");
+    var newsdiv = document.getElementById("newsdiv");
+    //console.log(breaking);
+    if (breaking == 0) {
+      newsfeed.innerHTML = "<marquee behavior='scroll' direction='left' style='padding-top: 12px;'>" + news.slice(1, 15)
+        .join(' | ') + "</marquee>";
+    } else {
+      newsfeed.style.backgroundColor = "red";
+      newsdiv.innerHTML = "BREAKING NEWS";
+      newsdiv.style.backgroundColor = "yellow";
+      newsdiv.style.color = "red";
+      newsfeed.innerHTML =
+        "<marquee style='color:yellow;' behavior='scrool' direction='left'>BREAKING NEWS: Kongehuset solgt til Australsk mafia boss!</marquee>"
+    }
+  }
+
+  //VEJR IKON VISES I HØJRE HJØRNE AF SEKTION 4
+  weather = JSON.parse(document.getElementById("weather").textContent);
+  //Her tilføjer vi vejret som er hentet fra en API + vi tilføjer et billed.
+  function weatherGet() {
+    temp = document.getElementById("temp");
+
+    celcius = "°";
+    temp.innerHTML =
+      "<img style='width: 20%; display: inline;' src='https://user-images.githubusercontent.com/42137372/52560861-ee527a00-2df9-11e9-84db-87394d6e0921.png'><span>" +
+      weather.CurrentData.temperature + " " + celcius + "</span>";
+  }
+
+
+  function timeDay() {
+
+    //Her samler vi både tid, dag og måned - Dog brguer vi på nuværende tidspunkt kun tiden.
+    var date = new Date();
+    var hour = date.getHours();
+    var min = date.getMinutes();
+    var today = date.getDay() - 1;
+    var datenow = date.getDate();
+    var month = date.getMonth() - 1;
+    var months = ['januar', 'februar', 'marts', 'april', 'maj', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'december']
+    var days = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
+    var time = document.getElementById("time");
+    var minfix = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
+    if (min <= 10-1) {
+      min = minfix[min];
+    }
+    time.innerHTML = "<i class='fas fa-clock'></i> &nbsp;" + hour + ":" + min;
+  }
+
+  //med et klik på skærmen slår man fuld skærm funktionen til
+  function toggleFullScreen() {
+    var doc = window.document;
+    var docEl = doc.documentElement;
+
+    var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen ||
+      docEl.msRequestFullscreen;
+    var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+    if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+      requestFullScreen.call(docEl);
+    } else {
+      cancelFullScreen.call(doc);
+    }
+  }
+
+  newsFeed();
+  //messages();
+  weatherGet();
+  timeDay();
+  nextNews(0);
+
+  //Tidsdefault til news i sektion 1 og 2
+  setInterval(function () {
+    changeNews()
+  }, 10000);
+  setInterval(function () {
+    weatherGet()
+  }, 10000);
+  setInterval(function(){timeDay()}, 10000);
+  setInterval(function () {
+    location.reload()
+  }, 6000000);
+</script>
+</body>
+
+</html>

@@ -11,10 +11,10 @@ var totalNews = [];
 var value = 0;
 
 var con = mysql.createConnection({
-  host: "sql.itcn.dk",
-  user: "lass679a.SKOLE",
-  password: "w0RpS5hG68",
-  database: "lass679a5.SKOLE"
+  host: "****",
+  user: "****",
+  password: "****",
+  database: "****"
 
   /*host: "localhost",
   user: "testhost",

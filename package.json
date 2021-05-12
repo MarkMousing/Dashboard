@@ -10900,7 +10900,7 @@
       "resolved": "https://registry.npmjs.org/node-status-codes/-/node-status-codes-1.0.0.tgz",
       "version": "1.0.0"
     },
-    "nodemailer": "^5.1.1",
+    "nodemailer": "^6.4.16",
     "nodemon": "^1.18.9",
     "nopt": {
       "integrity": "sha1-xkZdvwirzU2zWTF/eaxopkayj/k=",
